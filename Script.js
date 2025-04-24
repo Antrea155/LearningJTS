@@ -1,19 +1,30 @@
-// Get the form element and listen for the submit event
-document.getElementById('contact-form').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevents the form from reloading the page
+document.getElementById('contact-form').addEventListener
+('submit', async function(event) 
+    {
+        event.preventDefault(); // Prevents the form from reloading the page
 
-    // Get form values
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
+        const form = event.target; 
+        const formData = new FormData(form);
 
-    // Simple form validation (make sure all fields are filled out)
-    if (name && email && message) {
-        alert(`Thank you, ${name}! Your message has been sent.`);
-        
-        // Optionally, you could clear the form here
-        document.getElementById('contact-form').reset();
-    } else {
-        alert('Please fill in all fields.');
+        try 
+        {//submit form to Formspree
+            const response = await fetch 
+            (
+              //URL                 POST                SEND        JSON response instead of a redirect.
+              form.action,{ method: form.method, body: formData, headers:{'Accept': 'application/json'}}
+            );
+            if (response.ok) 
+            {
+                alert("Thanks for your message! I'll get back to you soon.");
+                form.reset();
+            }else 
+            {
+                alert("Oops! There was a problem submitting your form.");
+            }
+        } catch (error) 
+        {
+            alert("Something went wrong. Please try again later.");
+            console.error(error);
+        }
     }
-});
+);

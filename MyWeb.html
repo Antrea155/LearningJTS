@@ -37,15 +37,15 @@
 
     <section id="contact">
         <h2>Contact Me</h2>
-        <form id="contact-form">
+        <form id="contact-form" action = "https://formspree.io/f/xvgaoyjq" method="POST">
             <label for="name">Name:</label>
-            <input type="text" id="name" required><br><br>
+            <input type="text" name="name" id="name" required><br><br> <!-- attr name is needed for each input -->
 
             <label for="email">Email:</label>
-            <input type="email" id="email" required><br><br>
+            <input type="email" name="email" id="email" required><br><br>
 
             <label for="message">Message:</label><br>
-            <textarea id="message" rows="4" required></textarea><br><br>
+            <textarea name="message" id="message" rows="4" required></textarea><br><br>
 
             <button type="submit">Send</button>
         </form>
